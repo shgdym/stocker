@@ -1,26 +1,32 @@
-import baostock as bs
-import pandas as pd
+from StockerDB import StockerDB
+from win10toast import ToastNotifier
+import _thread as thread
 
-# login
-lg = bs.login()
-# show login info
-print('login respond error_code:'+lg.error_code)
-print('login respond  error_msg:'+lg.error_msg)
+toaster = ToastNotifier()
 
-# get base info
-rs = bs.query_stock_basic(code="sh.600000")
-# rs = bs.query_stock_basic(code_name="浦发银行")
-print('query_stock_basic respond error_code:'+rs.error_code)
-print('query_stock_basic respond  error_msg:'+rs.error_msg)
+def win_toast(toast_title, toast_content):
+    toaster.show_toast(toast_title,
+                       toast_content,
+                       duration=7200)
 
-# print result
-data_list = []
-while (rs.error_code == '0') & rs.next():
+def run_export(toast_content):
+    print(toast_content)
+# thread.start_new_thread(win_toast, ("Thread-1", "Thread-1", ))
+# thread.start_new_thread(run_export, ("Thread-1", ))
 
-    data_list.append(rs.get_row_data())
-result = pd.DataFrame(data_list, columns=rs.fields)
 
-print(result)
+objStockerDB = StockerDB()
+stockerList = objStockerDB.get_dsz_symbol()
 
-# logout
-bs.logout()
+for stockerInfo in stockerList:
+    stocke_code = stockerInfo[0]
+    stocke_name = stockerInfo[1]
+    stocke_price = stockerInfo[2]
+
+    stocke_code = stocke_code.replace('SH', 'sh.')
+    stocke_code = stocke_code.replace('SZ', 'sz.')
+
+
+    print(stocke_code)
+    exit()
+
