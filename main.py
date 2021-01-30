@@ -2,6 +2,8 @@ from StockerDB import StockerDB
 from Baostocker import Baostocker
 from win10toast import ToastNotifier
 import _thread as thread
+import datetime
+import json
 
 toaster = ToastNotifier()
 objBaostocker = Baostocker()
@@ -20,15 +22,26 @@ def run_export(toast_content):
 
 stockerList = objStockerDB.get_dsz_symbol()
 
+today = datetime.date.today()
+start_date = today - datetime.timedelta(days=20)
+
 for stockerInfo in stockerList:
-    stocke_code = stockerInfo[0]
+    stocke_symbol = stockerInfo[0]
     stocke_name = stockerInfo[1]
     stocke_price = stockerInfo[2]
 
-    stocke_code = stocke_code.replace('SH', 'sh.')
+    stocke_code = stocke_symbol.replace('SH', 'sh.')
     stocke_code = stocke_code.replace('SZ', 'sz.')
 
-    res = objBaostocker.getKData(stocke_code, '2021-01-03', '2021-01-10')
-    print(res)
-    exit()
+    k_data = objBaostocker.getKData(stocke_code, str(start_date), str(today))
+    k_dict = {}
+    for item in k_data:
+        k_dict[item[0]] = item
+    json_str = json.dumps(k_dict)
+
+    objStockerDB.update_k_data(stocke_symbol, json_str)
+
+print("update k data success! ")
+
+
 

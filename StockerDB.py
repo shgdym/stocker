@@ -14,5 +14,9 @@ class StockerDB(object):
 
         return rows
 
+    def update_k_data(self, stocker_symbol, json_data):
+        sql = "update `baostock`.`300yi` set k_data='{}' where symbol = '{}' limit 1".format(json_data, stocker_symbol)
+        objMysql.query(sql)
+
     def __del__(self):
         del self.objMysql
