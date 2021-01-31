@@ -15,11 +15,7 @@ class Baostocker:
     @staticmethod
     def getKData(code, startdate, enddate):
         rs = bs.query_history_k_data(code,
-                                     "date,code,high,close,low,tradeStatus",
+                                     "date,code,high,close,low,tradeStatus,pctChg",
                                      start_date=startdate, end_date=enddate,
                                      frequency="d", adjustflag="3")
-        result_list = []
-        while (rs.error_code == '0') & rs.next():
-            result_list.append(rs.get_row_data())
-
-        return result_list
+        return rs

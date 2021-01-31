@@ -19,6 +19,6 @@ const = Const()
 # mysql
 const.DB_HOST = '127.0.0.1'
 const.DB_USER = 'root'
-const.DB_PASS = 'Duyimin1996'
+const.DB_PASS = ''
 const.DB_NAME = 'baostock'
 const.DB_PORT = 3306
