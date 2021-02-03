@@ -1,20 +1,16 @@
-import configparser
-import os
+from config import global_config
 
 import requests
 import json
 
 url = "https://xueqiu.com/service/screener/screen?category=CN&exchange=sh_sz&areacode=&indcode=&order_by=symbol&order=desc&page=1&size=300&only_count=0&current=&pct=&fmc=30000000000_99999999999999999999"
 class SnowBallSpider:
-    def __init__(self, config_file='config.ini'):
-        self._path = os.path.join(os.getcwd(), config_file)
-        if not os.path.exists(self._path):
-            raise FileNotFoundError("No such file: config.ini")
-        self._config = configparser.ConfigParser()
-        self._config.read(self._path, encoding='utf-8-sig')
-        self._configRaw = configparser.RawConfigParser()
-        self._configRaw.read(self._path, encoding='utf-8-sig')
-
+    def __init__(self):
+        self.min_value = global_config.getRaw('config', 'MIN_MARKET_VALUE')
+        self.max_value = global_config.getRaw('config', 'MAX_MARKET_VALUE')
+        print(self.max_value)
+        print(self.min_value)
+        exit()
         self.header = {
             'Accept': '*/*',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36',

@@ -4,11 +4,11 @@ import json
 from SnowBallSpider import SnowBallSpider
 
 
-# ObjSpider = SnowBallSpider()    # spider obj
-objStockerDB = StockerDB()      # stocker db
+ObjSpider = SnowBallSpider()    # spider obj
+# objStockerDB = StockerDB()      # stocker db
 
-stockerList = objStockerDB.get_dsz_symbol()
-print(stockerList)
+# stockerList = objStockerDB.get_dsz_symbol()
+
 exit()
 today = datetime.date.today()
 start_date = today - datetime.timedelta(days=25)
