@@ -1,13 +1,15 @@
 from StockerDB import StockerDB
 import datetime
 import json
-import requests
+from SnowBallSpider import SnowBallSpider
 
 
-objStockerDB = StockerDB()
+# ObjSpider = SnowBallSpider()    # spider obj
+objStockerDB = StockerDB()      # stocker db
 
 stockerList = objStockerDB.get_dsz_symbol()
-
+print(stockerList)
+exit()
 today = datetime.date.today()
 start_date = today - datetime.timedelta(days=25)
 date_range = -7

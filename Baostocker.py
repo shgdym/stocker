@@ -9,8 +9,6 @@ class Baostocker:
     @staticmethod
     def login():
         lg = bs.login()
-        print('login respond error_code:' + lg.error_code)
-        print('login respond  error_msg:' + lg.error_msg)
 
     @staticmethod
     def getKData(code, startdate, enddate):
