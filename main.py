@@ -2,18 +2,16 @@ from StockerDB import StockerDB
 from config import global_config
 import datetime
 import json
+import json2csv
 
-
+json2csv.updateList()
+exit()
 if global_config.getRaw('config', 'UPDATE_STOCKER') != "NO":
     day_Week = datetime.datetime.now().weekday()
     if day_Week == 1:
-        from SnowBallSpider import SnowBallSpider
-        ObjSpider = SnowBallSpider()
-        ObjSpider.getDSZResult()
+        json2csv.updateList()
 else:
-    from SnowBallSpider import SnowBallSpider
-    ObjSpider = SnowBallSpider()
-    ObjSpider.getDSZResult()
+    json2csv.updateList()
 
 
 

@@ -1,0 +1,37 @@
+import csv
+import json
+import sys
+import codecs
+
+
+def trans(path):
+    jsonData = codecs.open(path + '.json', 'r', 'utf-8')
+    csvfile = open(path + '.csv', 'w', newline='')  # python3下
+    writer = csv.writer(csvfile, delimiter='\t')
+    flag = True
+    for line in jsonData:
+        dic = json.loads(line[0:-1])
+        if flag:
+            # 获取属性列表
+            keys = list(dic.keys())
+            print(keys)
+            writer.writerow(keys)  # 将属性列表写入csv中
+            flag = False
+        else:
+            # 读取json数据的每一行，将values数据一次一行的写入csv中
+            writer.writerow(list(dic.values()))
+    jsonData.close()
+    csvfile.close()
+
+def updateList():
+    from SnowBallSpider import SnowBallSpider
+    ObjSpider = SnowBallSpider()
+    jsonData = ObjSpider.getDSZResult()
+    with open("dsz.json", "w") as fp:
+        fp.write(json.dumps(jsonData, indent=4))
+
+
+if __name__ == '__main__':
+    path = str(sys.argv[1])  # 获取path参数
+    print(path)
+    trans(path)
