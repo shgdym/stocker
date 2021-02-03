@@ -29,7 +29,7 @@ class SnowBallSpider:
 
     def getDSZResult(self):
         # get api content
-        url = "https://xueqiu.com/service/screener/screen?category=CN&exchange=sh_sz&areacode=&indcode=&order_by=symbol&order=desc&page=1&size=300&only_count=0&current=&pct=&fmc={}_{}".format(self.min_value, self.max_value)
+        url = "https://xueqiu.com/service/screener/screen?category=CN&exchange=sh_sz&areacode=&indcode=&order_by=symbol&order=desc&page=1&size=4000&only_count=0&current=&pct=&fmc={}_{}".format(self.min_value, self.max_value)
         res = requests.get(url, headers=self.header)
         content = res.content
 
