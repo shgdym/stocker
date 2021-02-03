@@ -1,18 +1,25 @@
 from StockerDB import StockerDB
+from config import global_config
 import datetime
 import json
-from SnowBallSpider import SnowBallSpider
 
 
-ObjSpider = SnowBallSpider()    # spider obj
-# objStockerDB = StockerDB()      # stocker db
+if global_config.getRaw('config', 'UPDATE_STOCKER') != "NO":
+    day_Week = datetime.datetime.now().weekday()
+    if day_Week == 1:
+        from SnowBallSpider import SnowBallSpider
+        ObjSpider = SnowBallSpider()
+        ObjSpider.getDSZResult()
+else:
+    from SnowBallSpider import SnowBallSpider
+    ObjSpider = SnowBallSpider()
+    ObjSpider.getDSZResult()
 
-# stockerList = objStockerDB.get_dsz_symbol()
 
-exit()
+
 today = datetime.date.today()
 start_date = today - datetime.timedelta(days=25)
-date_range = -7
+date_range = -int(global_config.getRaw('config', 'DATE_RANGE'))
 res_list = []
 
 for stockerInfo in stockerList:

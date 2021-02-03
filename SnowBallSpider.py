@@ -1,16 +1,12 @@
 from config import global_config
-
 import requests
 import json
 
-url = "https://xueqiu.com/service/screener/screen?category=CN&exchange=sh_sz&areacode=&indcode=&order_by=symbol&order=desc&page=1&size=300&only_count=0&current=&pct=&fmc=30000000000_99999999999999999999"
 class SnowBallSpider:
     def __init__(self):
         self.min_value = global_config.getRaw('config', 'MIN_MARKET_VALUE')
         self.max_value = global_config.getRaw('config', 'MAX_MARKET_VALUE')
-        print(self.max_value)
-        print(self.min_value)
-        exit()
+
         self.header = {
             'Accept': '*/*',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36',
@@ -22,7 +18,6 @@ class SnowBallSpider:
         # self.getHttpResult()
 
     def getCookie(self):
-
         # get cookie
         res = requests.get('https://xueqiu.com/', headers=self.header)
         cookie_dic = res.cookies.get_dict()
@@ -34,6 +29,9 @@ class SnowBallSpider:
 
     def getDSZResult(self):
         # get api content
+        url = "https://xueqiu.com/service/screener/screen?category=CN&exchange=sh_sz&areacode=&indcode=&order_by=symbol&order=desc&page=1&size=300&only_count=0&current=&pct=&fmc={}_{}".format(self.min_value, self.max_value)
+        print(url)
+        exit()
         res = requests.get(url, headers=self.header)
         content = res.content
 
