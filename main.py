@@ -13,17 +13,24 @@ if global_config.getRaw('config', 'UPDATE_STOCKER') != "NO":
         json2csv.updateList()
 else:
     json2csv.updateList()
-json2csv.updateList()
 pf = pd.read_csv('dsz.csv', header=None, sep=' ')
-stockerList = pf.values.tolist()
 
+# TODO update k_data
+
+stockerList = pf.values.tolist()
 today = datetime.date.today()
 start_date = today - datetime.timedelta(days=25)
 date_range = -int(global_config.getRaw('config', 'DATE_RANGE'))
 res_list = []
 
+Flag = True
 for stockerInfo in stockerList:
-    stocke_symbol = stockerInfo[2]
+    if Flag:
+        Flag = False
+        continue
+    print(stockerInfo)
+    exit()
+    stocke_symbol = stockerInfo[1]
     stocke_name = stockerInfo[3]
     stocke_price = stockerInfo[2]
     result_dict = json.loads(stockerInfo[4])
