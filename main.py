@@ -1,4 +1,3 @@
-from StockerDB import StockerDB
 from config import global_config
 import datetime
 import json
