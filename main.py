@@ -27,8 +27,7 @@ for stockerInfo in stockerList:
     if Flag:
         Flag = False
         continue
-    print(stockerInfo)
-    exit()
+
     stocke_symbol = stockerInfo[1]
     stocke_name = stockerInfo[3]
     stocke_price = stockerInfo[2]
