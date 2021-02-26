@@ -144,17 +144,7 @@ for stocker in stockerList:
 
     url = "http://image.sinajs.cn/newchart/daily/n/" + stocker_code + ".gif"
     res_list.append(fc_list[0][1]+" "+result_list[-1][2]+" "+url)
-    # print(y_stat)
-    # print(t_stat)
-    # print(abs(abs(t_pctChg) - abs(y_pctChg)))
-    # print(abs(t_high - y_high) / t_close)
-    # print(abs(t_low - y_low) / t_close)
-    # print(high_diff)
-    # print(low_diff)
-    # print(res_list)
-    # exit()
-print(res_list)
-exit()
+
 if len(res_list) > 0:
     file = 'result.txt'
     file_handle = open(file, mode='w')
